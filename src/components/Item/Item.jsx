@@ -1,7 +1,8 @@
-import React from 'react'
-import './Item.css'
+import React, { useRef } from 'react'
 
 export default function Item({todos, allTodo, setTodo}) {
+
+  const elTitle = useRef(null)
 
   function handleDelTodo(delTodo) {
     const filtered = allTodo.filter(todo => todo.id != delTodo)
@@ -20,14 +21,33 @@ export default function Item({todos, allTodo, setTodo}) {
     })
   }
 
+  function handleCheckTodo (evt, todoId){
+    console.log(evt.target.checked);
+    allTodo.forEach(element =>{
+      if (element.id === todoId) {
+        element.isComplate = evt.target.checked
+        setTodo([...allTodo])
+      }
+    })
+
+    if (evt.target.checked) {
+      elTitle.current.style.textDecoration = 'line-through';
+    } else {
+      elTitle.current.style.textDecoration = 'none';
+    }
+  }
+
   return (
     
-    <li>
-        <input type="checkbox" />
-        <p>{todos.id}</p>
-        <h3>{todos.text}</h3>
-        <button onClick={() => handleDelTodo(todos.id)}>Del</button>
-        <button onClick={() => handleEditTodo(todos)}>Edit</button>
+    <li className='w-100 pe-4 ps-4 pt-2 pb-2 d-flex justify-content-between align-items-center mt-3 border rounded'>
+        <div className='d-flex align-items-center '>
+        <input onChange={(evt) => handleCheckTodo(evt, todos.id)} type="checkbox" />
+        <h3 className='ms-5' ref={elTitle}>{todos.text}</h3>
+        </div>
+        <div>
+        <button className='btn btn-primary me-3' onClick={() => handleEditTodo(todos)}>Edit</button>
+        <button className='btn btn-danger' onClick={() => handleDelTodo(todos.id)}>Del</button>
+        </div>
     </li>
     
   )

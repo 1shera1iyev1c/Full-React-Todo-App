@@ -2,7 +2,7 @@ import React from 'react'
 
 export function List({children}) {
   return (
-    <ul>
+    <ul className='list-unstyled p-0'>
         {children}
     </ul>
   )
