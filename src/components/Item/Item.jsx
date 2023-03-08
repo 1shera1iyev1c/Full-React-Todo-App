@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
 import "./Item.css";
 
-export default function Item({ todos, allTodo, setTodo }) {
+export default function Item({ todos, allTodo, setTodo, saveStorage }) {
   const elTitle = useRef(null);
 
   function handleDelTodo(delTodo) {
     const filtered = allTodo.filter((todo) => todo.id != delTodo);
 
     setTodo(filtered);
+    saveStorage(filtered);
   }
 
   function handleEditTodo(todo) {
@@ -17,6 +18,7 @@ export default function Item({ todos, allTodo, setTodo }) {
       if (element.id === todo.id) {
         element.text = editTodo;
         setTodo([...allTodo]);
+        saveStorage([...allTodo])
       }
     });
   }
@@ -27,6 +29,7 @@ export default function Item({ todos, allTodo, setTodo }) {
       if (element.id === todoId) {
         element.isComplate = evt.target.checked;
         setTodo([...allTodo]);
+        saveStorage([...allTodo]);
       }
     });
 
@@ -43,8 +46,9 @@ export default function Item({ todos, allTodo, setTodo }) {
         <input
           onChange={(evt) => handleCheckTodo(evt, todos.id)}
           type="checkbox"
+          checked={todos.isComplate ? true : false}
         />
-        <h3 className="ms-5 h4 d-block text-light text" ref={elTitle}>
+        <h3 className={todos.isComplate ? 'complate ms-5 h4 d-block text-light' : 'ms-5 h4 d-block text-light text'} ref={elTitle}>
           {todos.text}
         </h3>
       </div>

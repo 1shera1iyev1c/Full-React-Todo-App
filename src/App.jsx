@@ -3,7 +3,12 @@ import { List, Item } from "./components";
 import "./index.css";
 
 export default function App() {
-  const [todo, setTodo] = useState([]);
+  const saveStorage = (data, dataName = "todos") => {
+    localStorage.setItem(dataName, JSON.stringify(data));
+  };
+
+  const localData = JSON.parse(localStorage.getItem("todos")) || [];
+  const [todo, setTodo] = useState(localData);
   const [count, setCount] = useState(0);
   const countTodo = Math.round(Math.random() * 10);
   const date = new Date();
@@ -20,6 +25,7 @@ export default function App() {
           isComplate: false,
         };
         setTodo([newTodo, ...todo]);
+        saveStorage([newTodo, ...todo]);
         evt.target.value = null;
       }
     } else {
@@ -101,6 +107,7 @@ export default function App() {
                 todos={todos}
                 allTodo={todo}
                 setTodo={setTodo}
+                saveStorage={saveStorage}
               />
             ))}
           </List>
