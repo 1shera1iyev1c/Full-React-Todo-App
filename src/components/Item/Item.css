@@ -1,0 +1,7 @@
+.item{
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(162, 89, 255, 0)), to(#32ff3c))
+}
+.text{
+    max-width: 300px;
+    text-shadow: 5px 5px 3px  blue;
+}

@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url('https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {
@@ -20,4 +23,7 @@ code {
 ul{
   list-style-type: none;
   padding: 0;
+}
+.content{
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(162, 89, 255, 0)), to(#7206ff))
 }

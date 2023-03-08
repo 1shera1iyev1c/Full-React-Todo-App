@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import "./Item.css";
 
 export default function Item({ todos, allTodo, setTodo }) {
   const elTitle = useRef(null);
@@ -37,22 +38,22 @@ export default function Item({ todos, allTodo, setTodo }) {
   }
 
   return (
-    <li className="w-100 pe-4 ps-4 pt-2 pb-2 d-flex justify-content-between align-items-center mt-3 border rounded">
+    <li className="w-100 mt-4 item p-3 d-flex justify-content-between align-items-center border-success">
       <div className="d-flex align-items-center ">
         <input
           onChange={(evt) => handleCheckTodo(evt, todos.id)}
           type="checkbox"
         />
-        <h3 className="ms-5" ref={elTitle}>
+        <h3 className="ms-5 h4 d-block text-light text" ref={elTitle}>
           {todos.text}
         </h3>
       </div>
-      <div className="d-flex rounded btn btn-secondary">
-        <span className="text-light">{todos.timeHour}:</span>
-        <span className="text-light">{todos.timeMin}:</span>
-        <span className="text-light">{todos.timeSec}</span>
-      </div>
-      <div>
+      <div className="d-flex">
+        <div className="d-flex rounded btn btn-secondary me-5">
+          <span className="text-light">{todos.timeHour}:</span>
+          <span className="text-light">{todos.timeMin}:</span>
+          <span className="text-light">{todos.timeSec}</span>
+        </div>
         <button
           className="btn btn-primary me-3"
           onClick={() => handleEditTodo(todos)}
@@ -63,7 +64,7 @@ export default function Item({ todos, allTodo, setTodo }) {
           className="btn btn-danger"
           onClick={() => handleDelTodo(todos.id)}
         >
-          Del
+          Delete
         </button>
       </div>
     </li>
